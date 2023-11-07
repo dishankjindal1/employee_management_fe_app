@@ -19,16 +19,19 @@ class DashboardRepoImpl extends DashboardRepo {
   @override
   Future<List<EmployeeEntity>> read() async {
     try {
-      return _employeeService.fetchAll();
+      return _employeeService.fetchEntity();
     } catch (e) {
       rethrow;
     }
   }
 
   @override
-  Future<EmployeeEntity> update(String id, EmployeeEntity entity) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> update(String id, EmployeeEntity entity) {
+    try {
+      return _employeeService.updateEntity(id, entity);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override

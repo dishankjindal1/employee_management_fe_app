@@ -12,24 +12,24 @@ class EmployeeEntity extends Equatable {
   final String id;
   final String name;
   final Designation designation;
-  final DateTime from;
-  final DateTime to;
+  final DateTime startDate;
+  final DateTime endDate;
   final DateTime createdAt;
 
   const EmployeeEntity._({
     required this.id,
     required this.name,
     required this.designation,
-    required this.from,
-    required this.to,
+    required this.startDate,
+    required this.endDate,
     required this.createdAt,
   });
 
   EmployeeEntity.uuid({
     required this.name,
     required this.designation,
-    required this.from,
-    required this.to,
+    required this.startDate,
+    required this.endDate,
   })  : id = const Uuid().v4(),
         createdAt = DateTime.now();
 
@@ -37,16 +37,16 @@ class EmployeeEntity extends Equatable {
     String? id,
     String? name,
     Designation? designation,
-    DateTime? from,
-    DateTime? to,
+    DateTime? startDate,
+    DateTime? endDate,
     DateTime? createdAt,
   }) {
     return EmployeeEntity._(
       id: id ?? this.id,
       name: name ?? this.name,
       designation: designation ?? this.designation,
-      from: from ?? this.from,
-      to: to ?? this.to,
+      startDate: startDate ?? this.startDate,
+      endDate: endDate ?? this.endDate,
       createdAt: createdAt ?? this.createdAt,
     );
   }
@@ -56,8 +56,8 @@ class EmployeeEntity extends Equatable {
       'id': id,
       'name': name,
       'designation': designation.name.toLowerCase(),
-      'from': from.millisecondsSinceEpoch,
-      'to': to.millisecondsSinceEpoch,
+      'start_date': startDate.millisecondsSinceEpoch,
+      'end_date': endDate.millisecondsSinceEpoch,
       'createdAt': createdAt.millisecondsSinceEpoch,
     };
   }
@@ -72,18 +72,18 @@ class EmployeeEntity extends Equatable {
         id,
         name,
         designation,
-        from,
-        to,
+        startDate,
+        endDate,
         createdAt,
       ];
 }
 
 extension EmployeeEntityHelperFunctions on EmployeeEntity {
   String get formatFrom {
-    return 'From ${DateFormat('dd MMM, yyyy').format(from)}';
+    return 'From ${DateFormat('dd MMM, yyyy').format(startDate)}';
   }
 
   String get formatToFrom {
-    return '${DateFormat('dd MMM, yyyy').format(from)} - ${DateFormat('dd MMM, yyyy').format(to)}';
+    return '${DateFormat('dd MMM, yyyy').format(startDate)} - ${DateFormat('dd MMM, yyyy').format(endDate)}';
   }
 }

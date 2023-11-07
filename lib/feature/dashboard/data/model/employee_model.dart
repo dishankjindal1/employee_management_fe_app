@@ -5,15 +5,15 @@ class EmployeeModel extends EmployeeEntity {
     required String id,
     required String name,
     required String designation,
-    required int from,
-    required int to,
+    required int startDate,
+    required int endDate,
     required int createdAt,
   }) : super._(
           id: id,
           name: name,
           designation: Designation.fromString(designation),
-          from: DateTime.fromMillisecondsSinceEpoch(from),
-          to: DateTime.fromMillisecondsSinceEpoch(to),
+          startDate: DateTime.fromMillisecondsSinceEpoch(startDate),
+          endDate: DateTime.fromMillisecondsSinceEpoch(endDate),
           createdAt: DateTime.fromMillisecondsSinceEpoch(createdAt),
         );
 
@@ -22,8 +22,8 @@ class EmployeeModel extends EmployeeEntity {
       id: map['id'] as String,
       name: map['name'] as String,
       designation: map['designation'] as String,
-      from: map['from'] as int,
-      to: map['to'] as int,
+      startDate: map['start_date'] as int,
+      endDate: map['end_date'] as int,
       createdAt: map['createdAt'] as int,
     );
   }

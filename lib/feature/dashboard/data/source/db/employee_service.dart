@@ -25,7 +25,7 @@ class EmployeeService {
     }
   }
 
-  Future<List<EmployeeEntity>> fetchAll() async {
+  Future<List<EmployeeEntity>> fetchEntity() async {
     try {
       if (_appStorage.appStorage.containsKey(runtimeType.toString())) {
         final data =
@@ -43,9 +43,18 @@ class EmployeeService {
     }
   }
 
+  Future<void> updateEntity(String id, EmployeeEntity entity) async {
+    try {
+      await deleteEntity(id);
+      await createEntity(entity);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   Future<void> deleteEntity(String id) async {
     try {
-      final result = await fetchAll();
+      final result = await fetchEntity();
       result.removeWhere((element) => element.id == id);
       _appStorage.appStorage.delete(runtimeType.toString());
       _appStorage.appStorage

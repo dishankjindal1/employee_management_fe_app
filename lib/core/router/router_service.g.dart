@@ -8,8 +8,7 @@ part of 'router_service.dart';
 
 List<RouteBase> get $appRoutes => [
       $splashRoute,
-      $employeeFlowRoute,
-      $employeeListRoute,
+      $employeeDashboardRoute,
       $crudEmployeeRoute,
     ];
 
@@ -35,37 +34,14 @@ extension $SplashRouteExtension on SplashRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $employeeFlowRoute => GoRouteData.$route(
-      path: '/employee',
-      factory: $EmployeeFlowRouteExtension._fromState,
-    );
-
-extension $EmployeeFlowRouteExtension on EmployeeFlowRoute {
-  static EmployeeFlowRoute _fromState(GoRouterState state) =>
-      EmployeeFlowRoute();
-
-  String get location => GoRouteData.$location(
-        '/employee',
-      );
-
-  void go(BuildContext context) => context.go(location);
-
-  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
-
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
-
-  void replace(BuildContext context) => context.replace(location);
-}
-
-RouteBase get $employeeListRoute => GoRouteData.$route(
+RouteBase get $employeeDashboardRoute => GoRouteData.$route(
       path: '/employee/all',
-      factory: $EmployeeListRouteExtension._fromState,
+      factory: $EmployeeDashboardRouteExtension._fromState,
     );
 
-extension $EmployeeListRouteExtension on EmployeeListRoute {
-  static EmployeeListRoute _fromState(GoRouterState state) =>
-      EmployeeListRoute();
+extension $EmployeeDashboardRouteExtension on EmployeeDashboardRoute {
+  static EmployeeDashboardRoute _fromState(GoRouterState state) =>
+      EmployeeDashboardRoute();
 
   String get location => GoRouteData.$location(
         '/employee/all',
@@ -89,10 +65,14 @@ RouteBase get $crudEmployeeRoute => GoRouteData.$route(
 extension $CrudEmployeeRouteExtension on CrudEmployeeRoute {
   static CrudEmployeeRoute _fromState(GoRouterState state) => CrudEmployeeRoute(
         state.pathParameters['crud']!,
+        id: state.uri.queryParameters['id'],
       );
 
   String get location => GoRouteData.$location(
         '/employee/${Uri.encodeComponent(crud)}',
+        queryParams: {
+          if (id != null) 'id': id,
+        },
       );
 
   void go(BuildContext context) => context.go(location);

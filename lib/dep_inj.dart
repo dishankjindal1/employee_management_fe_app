@@ -4,8 +4,9 @@ import 'package:employee_management_fe_app/feature/dashboard/data/repo/dashboard
 import 'package:employee_management_fe_app/feature/dashboard/data/source/db/employee_service.dart';
 import 'package:employee_management_fe_app/feature/dashboard/domain/repo/dashboard_repo.dart';
 import 'package:employee_management_fe_app/feature/dashboard/domain/usecase/create_employee_data.dart';
-import 'package:employee_management_fe_app/feature/dashboard/domain/usecase/delete_employees_data.dart';
+import 'package:employee_management_fe_app/feature/dashboard/domain/usecase/delete_employee_data.dart';
 import 'package:employee_management_fe_app/feature/dashboard/domain/usecase/fetch_employees_data.dart';
+import 'package:employee_management_fe_app/feature/dashboard/domain/usecase/update_employee_data.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> intializeDependencies() async {
@@ -35,4 +36,7 @@ Future<void> intializeDependencies() async {
 
   const deleteEmployeesDataUsecase = DeleteEmployeesDataUsecase(dashboardRepo);
   app.registerSingleton(deleteEmployeesDataUsecase);
+
+  const updateEmployeesDataUsecase = UpdateEmployeesDataUsecase(dashboardRepo);
+  app.registerSingleton(updateEmployeesDataUsecase);
 }

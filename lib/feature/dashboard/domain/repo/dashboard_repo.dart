@@ -7,7 +7,7 @@ abstract class DashboardRepo {
 
   Future<List<EmployeeEntity>> read();
 
-  Future<EmployeeEntity> update(String id, EmployeeEntity entity);
+  Future<void> update(String id, EmployeeEntity entity);
 
   Future<void> delete(String id);
 }

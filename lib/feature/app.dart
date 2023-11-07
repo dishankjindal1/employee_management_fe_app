@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -22,18 +23,28 @@ class App extends StatelessWidget {
           DefaultCupertinoLocalizations.delegate,
         ],
         builder: (context, child) {
-          ErrorWidget.builder = (errorDetails) => const Material(
-                child: Align(
-                  child: Text('Error Screen'),
-                ),
-              );
+          const errorWidget = Material(
+            child: Align(
+              child: Text('Error Screen'),
+            ),
+          );
+
+          ErrorWidget.builder = (errorDetails) => errorWidget;
+
+          if (child == null) {
+            return errorWidget;
+          }
 
           return LayoutBuilder(builder: (context, constraints) {
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(
                 textScaleFactor: constraints.maxWidth / 460,
               ),
-              child: child!,
+              child: Theme(
+                  data: Theme.of(context).copyWith(
+                    textTheme: GoogleFonts.robotoTextTheme(),
+                  ),
+                  child: ScaffoldMessenger(child: child)),
             );
           });
         },

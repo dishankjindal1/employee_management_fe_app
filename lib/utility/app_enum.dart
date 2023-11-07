@@ -27,8 +27,7 @@ enum Designation {
 
 enum CrudOperation {
   create,
-  update,
-  delete;
+  update;
 
   factory CrudOperation.fromString(String? value) {
     switch (value?.toLowerCase()) {
@@ -36,8 +35,6 @@ enum CrudOperation {
         return create;
       case 'update':
         return update;
-      case 'delete':
-        return delete;
       default:
         return create;
     }
